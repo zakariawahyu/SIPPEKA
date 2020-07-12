@@ -1,13 +1,3 @@
-<?php
-include '../database/koneksi.php';
- 
-header("Content-type: application/vnd.ms-word");
-header("Content-Disposition: attachment;Filename=Pengajuan Cuti.doc");
-
-$idcuti = $_GET['id'];
-$query = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg, jabatan jb, golongan gl WHERE ct.id_pegawai=pg.id_pegawai and pg.id_jabatan=jb.id_jabatan and pg.id_golongan = gl.id_golongan and id_cutipegawai='$idcuti'");
-$row = mysqli_fetch_array($query);
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -61,7 +51,7 @@ $row = mysqli_fetch_array($query);
                 </td>
                 <td width="238" colspan="5" valign="top">
                     <p>
-                        <strong><?php echo $row['nama_pegawai'] ?></strong>
+                        <strong>Dr. M. BASIR, M.H.</strong>
                     </p>
                 </td>
                 <td width="104" colspan="3" valign="top">
@@ -72,7 +62,7 @@ $row = mysqli_fetch_array($query);
                 <td width="237" colspan="5" valign="top">
                     <p>
                         <strong> </strong>
-                        <strong><?php echo $row['nip'] ?></strong>
+                        <strong>196507021992031005</strong>
                     </p>
                 </td>
             </tr>
@@ -84,8 +74,7 @@ $row = mysqli_fetch_array($query);
                 </td>
                 <td width="238" colspan="5" valign="top">
                     <p>
-                        <?php echo $row['nama_jabatan'] ?>
-                    </p>
+                        KETUA                    </p>
                 </td>
                 <td width="104" colspan="3" valign="top">
                     <p>
@@ -106,8 +95,7 @@ $row = mysqli_fetch_array($query);
                 </td>
                 <td width="579" colspan="13" valign="top">
                     <p>
-                        <?php echo $row['unit_kerja'] ?>
-                    </p>
+                        PENGADILAN AGAMA KARAWANG                    </p>
                 </td>
             </tr>
             <tr>
@@ -134,16 +122,7 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="143" colspan="3" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti Tahunan') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                    </td>
                 <td width="27" colspan="2" valign="top">
                     <p>
                         2.
@@ -155,16 +134,7 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="170" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti Besar') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                    </td>
             </tr>
             <tr>
                 <td width="66" valign="top">
@@ -178,16 +148,8 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="143" colspan="3" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti Sakit') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                            V
+                                        </td>
                 <td width="27" colspan="2" valign="top">
                     <p>
                         4.
@@ -199,16 +161,7 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="170" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti Melahirkan') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                    </td>
             </tr>
             <tr>
                 <td width="66" valign="top">
@@ -225,16 +178,7 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="143" colspan="3" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti Karena Alasan Penting') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                    </td>
                 <td width="27" colspan="2" valign="top">
                     <p>
                         6.
@@ -249,16 +193,7 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
                 <td width="170" valign="top">
-                    <?php 
-                    
-                    if ($row['jenis_cuti'] == 'Cuti diluar Tanggungan Negara') {
-                        ?>
-                        V
-                        <?php
-                    }
-                    
-                    ?>
-                </td>
+                                    </td>
             </tr>
             <tr>
                 <td width="66" valign="top">
@@ -275,8 +210,7 @@ $row = mysqli_fetch_array($query);
             <tr>
                 <td width="680" colspan="15" valign="top">
                     <p>
-                        <?php echo $row['alasan_cuti'] ?>
-                    </p>
+                        Tahun Baru                    </p>
                 </td>
             </tr>
             <tr>
@@ -316,23 +250,19 @@ $row = mysqli_fetch_array($query);
             <tr>
                 <td width="197" colspan="4" valign="top">
                     <p>
-                        <?php echo $row['lama_cuti'] ?>
-                    </p>
+                        2                    </p>
                 </td>
                 <td width="162" colspan="4" valign="top">
                     <p>
-                        <?php echo $row['ket_lama_cuti'] ?>
-                    </p>
+                        Minggu                    </p>
                 </td>
                 <td width="142" colspan="5" valign="top">
                     <p align="center">
-                        <?php echo $row['dari_tanggal'] ?>
-                    </p>
+                        2020-07-15                    </p>
                 </td>
                 <td width="180" colspan="2" valign="top">
                     <p align="center">
-                        <?php echo $row['sampai_dengan'] ?>
-                    </p>
+                        2020-07-15                    </p>
                 </td>
             </tr>
             <tr>
@@ -504,95 +434,11 @@ $row = mysqli_fetch_array($query);
                     </p>
                     <p>
                         <strong>NIP : </strong>
-                        <strong> <?php echo $row['nip'] ?></strong>
+                        <strong> 196507021992031005</strong>
                     </p>
                 </td>
             </tr>
-            <?php 
-                if ($row['panitera_sekretaris'] == null) {
-                    ?>
-                <tr>
-                    <td width="66" valign="top">
-                    </td>
-                    <td width="614" colspan="14" valign="top">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="66" valign="top">
-                        <p>
-                            VII.
-                        </p>
-                    </td>
-                    <td width="614" colspan="14" valign="top">
-                        <p>
-                            KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI **
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="151" colspan="3" valign="top">
-                        <p>
-                            DISETUJUI
-                        </p>
-                    </td>
-                    <td width="162" colspan="2" valign="top">
-                        <p>
-                            PERUBAHAN ****
-                        </p>
-                    </td>
-                    <td width="132" colspan="6" valign="top">
-                        <p>
-                            DITANGGUHKAN ****
-                        </p>
-                    </td>
-                    <td width="235" colspan="4" valign="top">
-                        <p>
-                            TIDAK DISETUJUI
-                        </p>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="151" colspan="3" valign="top">
-                    </td>
-                    <td width="162" colspan="2" valign="top">
-                    </td>
-                    <td width="132" colspan="6" valign="top">
-                    </td>
-                    <td width="235" colspan="4" valign="top">
-                    </td>
-                </tr>
-                <tr>
-                    <td width="445" colspan="11" valign="top">
-                    </td>
-                    <td width="235" colspan="4" valign="top">
-                        <p>
-                            KETUA
-                        </p>
-                        <p>
-                            <strong><u>Dr.M.BASIR,M.H.</u></strong>
-                        </p>
-                        <p>
-                            <strong>NIP.</strong>
-                            <strong> </strong>
-                            <a
-                                href="https://sikep.mahkamahagung.go.id/administrasipegawai/default/view?id=eyJjaXBoZXJ0ZXh0IjoiZ1JKcHJRNmRyYUF6dFV0eEVYWnh1dz09IiwiaXYiOiJlYjdiMzAzN2NkOWZlYzgwNjU5NmI3MjFkYjc5MWU0NiIsInNhbHQiOiIyNWM4Y2M0NCIsIml0ZXJhdGlvbnMiOjk5OX0%3D"
-                            >
-                                <strong>19650702</strong>
-                            </a>
-                            <strong> 199203 1 005</strong>
-                        </p>
-                    </td>
-                </tr>
-                    <?php
-                } else {
-                    $atasanlangsung = $row['panitera_sekretaris'];
-
-                    $select = mysqli_query($koneksi, "SELECT * FROM pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and pg.nip='$atasanlangsung'");
-                    $atasanrow = mysqli_fetch_array($select);
-
-                    
-                ?>
-                <tr>
+            <tr>
                 <td width="66" valign="top">
                     <p>
                         VII.
@@ -640,10 +486,8 @@ $row = mysqli_fetch_array($query);
                 <td width="445" colspan="11" valign="top">
                 </td>
                 <td width="235" colspan="4" valign="top">
-
-                
                     <p>
-                        <strong><?php echo $atasanrow['nama_jabatan'] ?> </strong>
+                        <strong>PANITERA </strong>
                     </p>
                     <p>
                         <strong></strong>
@@ -655,10 +499,10 @@ $row = mysqli_fetch_array($query);
                         <strong></strong>
                     </p>
                     <p>
-                        <strong><u><?php echo $atasanrow['nama_pegawai'] ?> </u></strong>
+                        <strong><u>Drs.E.ARIFUDIN </u></strong>
                     </p>
                     <p>
-                        <strong>NIP : <?php echo $atasanrow['nip'] ?></strong>
+                        <strong>NIP : 19631115 199303 1 004</strong>
                     </p>
                 </td>
             </tr>
@@ -734,11 +578,6 @@ $row = mysqli_fetch_array($query);
                     </p>
                 </td>
             </tr>
-                <?php
-                }
-                
-
-                ?>
             <tr height="0">
                 <td width="66">
                 </td>
