@@ -509,8 +509,92 @@ $row = mysqli_fetch_array($query);
                 </td>
             </tr>
             <?php 
-                if ($row['panitera_sekretaris'] == null) {
+                if ($row['ketua'] == null && $row['panmud_kasubag'] != null && $row['panitera_sekretaris'] != null) {
+                    $atasankasubagpanmud = $row['panmud_kasubag'];
+                    $atasanpaniterasekretaris = $row['panitera_sekretaris'];
+
+                    $selectpanmudkasubag = mysqli_query($koneksi, "SELECT * FROM pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and pg.nip='$atasankasubagpanmud'");
+                    $kasubagpanmudrow = mysqli_fetch_array($selectpanmudkasubag);
+
+                    $selectpaniterasekretaris = mysqli_query($koneksi, "SELECT * FROM pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and pg.nip='$atasanpaniterasekretaris'");
+                    $paniterasekretarisrow = mysqli_fetch_array($selectpaniterasekretaris);
                     ?>
+                <tr>
+                    <td width="66" valign="top">
+                        <p>
+                            VII.
+                        </p>
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                        <p>
+                            PERTIMBANGAN ATASAN LANGSUNG **
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="197" colspan="4" valign="top">
+                        <p>
+                            DISETUJUI
+                        </p>
+                    </td>
+                    <td width="116" valign="top">
+                        <p>
+                            PERUBAHAN ****
+                        </p>
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                        <p>
+                            DITANGGUHKAN ****
+                        </p>
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                        <p>
+                            TIDAK DITETUJUI ****
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="197" colspan="4" valign="top">
+                    </td>
+                    <td width="116" valign="top">
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="445" colspan="11" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+
+                    
+                        <p>
+                            <strong><?php echo $kasubagpanmudrow['nama_jabatan'] ?> </strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong><u><?php echo $kasubagpanmudrow['nama_pegawai'] ?> </u></strong>
+                        </p>
+                        <p>
+                            <strong>NIP : <?php echo $kasubagpanmudrow['nip'] ?></strong>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="66" valign="top">
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                    </td>
+                </tr>
                 <tr>
                     <td width="66" valign="top">
                     </td>
@@ -520,7 +604,454 @@ $row = mysqli_fetch_array($query);
                 <tr>
                     <td width="66" valign="top">
                         <p>
+                            VIII.
+                        </p>
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                        <p>
+                            KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI **
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="151" colspan="3" valign="top">
+                        <p>
+                            DISETUJUI
+                        </p>
+                    </td>
+                    <td width="162" colspan="2" valign="top">
+                        <p>
+                            PERUBAHAN ****
+                        </p>
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                        <p>
+                            DITANGGUHKAN ****
+                        </p>
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                        <p>
+                            TIDAK DISETUJUI
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="151" colspan="3" valign="top">
+                    </td>
+                    <td width="162" colspan="2" valign="top">
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="445" colspan="11" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                        <p>
+                            <?php echo $paniterasekretarisrow['nama_jabatan'] ?>
+                        </p>
+                        <p>
+                            <strong><u> <?php echo $paniterasekretarisrow['nama_pegawai'] ?></u></strong>
+                        </p>
+                        <p>
+                            <strong>NIP.</strong>
+                            <strong> </strong>
+                            <strong><?php echo $paniterasekretarisrow['nip'] ?></strong>
+                        </p>
+                    </td>
+                </tr>
+                    <?php
+                } else if ($row['panmud_kasubag'] == null && $row['panitera_sekretaris'] == null && $row['ketua'] == null) {
+
+                    ?>
+                    <tr>
+                        <td width="66" valign="top">
+                            <p>
+                                VII.
+                            </p>
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                            <p>
+                                PERTIMBANGAN ATASAN LANGSUNG **
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="197" colspan="4" valign="top">
+                            <p>
+                                DISETUJUI
+                            </p>
+                        </td>
+                        <td width="116" valign="top">
+                            <p>
+                                PERUBAHAN ****
+                            </p>
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                            <p>
+                                DITANGGUHKAN ****
+                            </p>
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                TIDAK DITETUJUI ****
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="197" colspan="4" valign="top">
+                        </td>
+                        <td width="116" valign="top">
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="445" colspan="11" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+
+                        
+                            <p>
+                                <strong> </strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong><u> </u></strong>
+                            </p>
+                            <p>
+                                <strong>NIP : </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                            <p>
+                                VIII.
+                            </p>
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                            <p>
+                                KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI **
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="151" colspan="3" valign="top">
+                            <p>
+                                DISETUJUI
+                            </p>
+                        </td>
+                        <td width="162" colspan="2" valign="top">
+                            <p>
+                                PERUBAHAN ****
+                            </p>
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                            <p>
+                                DITANGGUHKAN ****
+                            </p>
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                TIDAK DISETUJUI
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="151" colspan="3" valign="top">
+                        </td>
+                        <td width="162" colspan="2" valign="top">
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="445" colspan="11" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                
+                            </p>
+                            <p>
+                                <strong><u></u></strong>
+                            </p>
+                            <p>
+                                <strong>NIP.</strong>
+                                <strong> </strong>
+                                <strong></strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <?php
+
+                } else if ($row['panmud_kasubag'] == null && $row['panitera_sekretaris'] == null && $row['ketua'] != null) {
+
+
+                    ?>
+                    <tr>
+                        <td width="66" valign="top">
+                            <p>
+                                VII.
+                            </p>
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                            <p>
+                                PERTIMBANGAN ATASAN LANGSUNG **
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="197" colspan="4" valign="top">
+                            <p>
+                                DISETUJUI
+                            </p>
+                        </td>
+                        <td width="116" valign="top">
+                            <p>
+                                PERUBAHAN ****
+                            </p>
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                            <p>
+                                DITANGGUHKAN ****
+                            </p>
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                TIDAK DITETUJUI ****
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="197" colspan="4" valign="top">
+                        </td>
+                        <td width="116" valign="top">
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="445" colspan="11" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+
+                        
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong></strong>
+                            </p>
+                            <p>
+                                <strong><u></u></strong>
+                            </p>
+                            <p>
+                                <strong>NIP : </strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="66" valign="top">
+                            <p>
+                                VIII.
+                            </p>
+                        </td>
+                        <td width="614" colspan="14" valign="top">
+                            <p>
+                                KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI **
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="151" colspan="3" valign="top">
+                            <p>
+                                DISETUJUI
+                            </p>
+                        </td>
+                        <td width="162" colspan="2" valign="top">
+                            <p>
+                                PERUBAHAN ****
+                            </p>
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                            <p>
+                                DITANGGUHKAN ****
+                            </p>
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                TIDAK DISETUJUI
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="151" colspan="3" valign="top">
+                        </td>
+                        <td width="162" colspan="2" valign="top">
+                        </td>
+                        <td width="132" colspan="6" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="445" colspan="11" valign="top">
+                        </td>
+                        <td width="235" colspan="4" valign="top">
+                            <p>
+                                KETUA
+                            </p>
+                            <p>
+                                <strong><u>Dr. M. BASIR, M.H.</u></strong>
+                            </p>
+                            <p>
+                                <strong>NIP.</strong>
+                                <strong> </strong>
+                                <strong>196507021992031005</strong>
+                            </p>
+                        </td>
+                    </tr>
+                    <?php
+
+                } else if ($row['panmud_kasubag'] == null && $row['panitera_sekretaris'] != null && $row['ketua'] != null) {
+                    $atasantengahpaniterasekretaris = $row['panitera_sekretaris'];
+
+                    $selecttengahpaniterasekretaris = mysqli_query($koneksi, "SELECT * FROM pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and pg.nip='$atasantengahpaniterasekretaris'");
+                    $tengahpaniterasekretarisrow = mysqli_fetch_array($selecttengahpaniterasekretaris);
+                    ?>
+                <tr>
+                    <td width="66" valign="top">
+                        <p>
                             VII.
+                        </p>
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                        <p>
+                            PERTIMBANGAN ATASAN LANGSUNG **
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="197" colspan="4" valign="top">
+                        <p>
+                            DISETUJUI
+                        </p>
+                    </td>
+                    <td width="116" valign="top">
+                        <p>
+                            PERUBAHAN ****
+                        </p>
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                        <p>
+                            DITANGGUHKAN ****
+                        </p>
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                        <p>
+                            TIDAK DITETUJUI ****
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="197" colspan="4" valign="top">
+                    </td>
+                    <td width="116" valign="top">
+                    </td>
+                    <td width="132" colspan="6" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="445" colspan="11" valign="top">
+                    </td>
+                    <td width="235" colspan="4" valign="top">
+
+                    
+                        <p>
+                            <strong><?php echo $tengahpaniterasekretarisrow['nama_jabatan'] ?> </strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong></strong>
+                        </p>
+                        <p>
+                            <strong><u><?php echo $tengahpaniterasekretarisrow['nama_pegawai'] ?> </u></strong>
+                        </p>
+                        <p>
+                            <strong>NIP : <?php echo $tengahpaniterasekretarisrow['nip'] ?></strong>
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <td width="66" valign="top">
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="66" valign="top">
+                    </td>
+                    <td width="614" colspan="14" valign="top">
+                    </td>
+                </tr>
+                <tr>
+                    <td width="66" valign="top">
+                        <p>
+                            VIII.
                         </p>
                     </td>
                     <td width="614" colspan="14" valign="top">
@@ -569,174 +1100,18 @@ $row = mysqli_fetch_array($query);
                             KETUA
                         </p>
                         <p>
-                            <strong><u>Dr.M.BASIR,M.H.</u></strong>
+                            <strong><u> Dr. M. BASIR, M.H.</u></strong>
                         </p>
                         <p>
                             <strong>NIP.</strong>
                             <strong> </strong>
-                            <a
-                                href="https://sikep.mahkamahagung.go.id/administrasipegawai/default/view?id=eyJjaXBoZXJ0ZXh0IjoiZ1JKcHJRNmRyYUF6dFV0eEVYWnh1dz09IiwiaXYiOiJlYjdiMzAzN2NkOWZlYzgwNjU5NmI3MjFkYjc5MWU0NiIsInNhbHQiOiIyNWM4Y2M0NCIsIml0ZXJhdGlvbnMiOjk5OX0%3D"
-                            >
-                                <strong>19650702</strong>
-                            </a>
-                            <strong> 199203 1 005</strong>
+                            <strong>196507021992031005</strong>
                         </p>
                     </td>
                 </tr>
-                    <?php
-                } else {
-                    $atasanlangsung = $row['panitera_sekretaris'];
-
-                    $select = mysqli_query($koneksi, "SELECT * FROM pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and pg.nip='$atasanlangsung'");
-                    $atasanrow = mysqli_fetch_array($select);
-
-                    
-                ?>
-                <tr>
-                <td width="66" valign="top">
-                    <p>
-                        VII.
-                    </p>
-                </td>
-                <td width="614" colspan="14" valign="top">
-                    <p>
-                        PERTIMBANGAN ATASAN LANGSUNG **
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td width="197" colspan="4" valign="top">
-                    <p>
-                        DISETUJUI
-                    </p>
-                </td>
-                <td width="116" valign="top">
-                    <p>
-                        PERUBAHAN ****
-                    </p>
-                </td>
-                <td width="132" colspan="6" valign="top">
-                    <p>
-                        DITANGGUHKAN ****
-                    </p>
-                </td>
-                <td width="235" colspan="4" valign="top">
-                    <p>
-                        TIDAK DITETUJUI ****
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td width="197" colspan="4" valign="top">
-                </td>
-                <td width="116" valign="top">
-                </td>
-                <td width="132" colspan="6" valign="top">
-                </td>
-                <td width="235" colspan="4" valign="top">
-                </td>
-            </tr>
-            <tr>
-                <td width="445" colspan="11" valign="top">
-                </td>
-                <td width="235" colspan="4" valign="top">
-
-                
-                    <p>
-                        <strong><?php echo $atasanrow['nama_jabatan'] ?> </strong>
-                    </p>
-                    <p>
-                        <strong></strong>
-                    </p>
-                    <p>
-                        <strong></strong>
-                    </p>
-                    <p>
-                        <strong></strong>
-                    </p>
-                    <p>
-                        <strong><u><?php echo $atasanrow['nama_pegawai'] ?> </u></strong>
-                    </p>
-                    <p>
-                        <strong>NIP : <?php echo $atasanrow['nip'] ?></strong>
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td width="66" valign="top">
-                </td>
-                <td width="614" colspan="14" valign="top">
-                </td>
-            </tr>
-            <tr>
-                <td width="66" valign="top">
-                    <p>
-                        VIII.
-                    </p>
-                </td>
-                <td width="614" colspan="14" valign="top">
-                    <p>
-                        KEPUTUSAN PEJABAT YANG BERWENANG MEMBERIKAN CUTI **
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td width="151" colspan="3" valign="top">
-                    <p>
-                        DISETUJUI
-                    </p>
-                </td>
-                <td width="162" colspan="2" valign="top">
-                    <p>
-                        PERUBAHAN ****
-                    </p>
-                </td>
-                <td width="132" colspan="6" valign="top">
-                    <p>
-                        DITANGGUHKAN ****
-                    </p>
-                </td>
-                <td width="235" colspan="4" valign="top">
-                    <p>
-                        TIDAK DISETUJUI
-                    </p>
-                </td>
-            </tr>
-            <tr>
-                <td width="151" colspan="3" valign="top">
-                </td>
-                <td width="162" colspan="2" valign="top">
-                </td>
-                <td width="132" colspan="6" valign="top">
-                </td>
-                <td width="235" colspan="4" valign="top">
-                </td>
-            </tr>
-            <tr>
-                <td width="445" colspan="11" valign="top">
-                </td>
-                <td width="235" colspan="4" valign="top">
-                    <p>
-                        KETUA
-                    </p>
-                    <p>
-                        <strong><u>Dr.M.BASIR,M.H.</u></strong>
-                    </p>
-                    <p>
-                        <strong>NIP.</strong>
-                        <strong> </strong>
-                        <a
-                            href="https://sikep.mahkamahagung.go.id/administrasipegawai/default/view?id=eyJjaXBoZXJ0ZXh0IjoiZ1JKcHJRNmRyYUF6dFV0eEVYWnh1dz09IiwiaXYiOiJlYjdiMzAzN2NkOWZlYzgwNjU5NmI3MjFkYjc5MWU0NiIsInNhbHQiOiIyNWM4Y2M0NCIsIml0ZXJhdGlvbnMiOjk5OX0%3D"
-                        >
-                            <strong>19650702</strong>
-                        </a>
-                        <strong> 199203 1 005</strong>
-                    </p>
-                </td>
-            </tr>
                 <?php
+
                 }
-                
 
                 ?>
             <tr height="0">

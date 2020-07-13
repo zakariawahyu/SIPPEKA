@@ -117,6 +117,10 @@
                                   ?>
                                   <option value="kasubagkeuangan">KASUBAG UMUM DAN KEUANGAN</option>
                                   <?php
+                                } elseif ($jabatan == 'KETUA') {
+                                  ?>
+                                  <option value="ketua">-</option>
+                                  <?php
                                 }
                                ?>
                             </select>
@@ -153,17 +157,17 @@
             if ($atasan == 'panitera') {
 
               $panitera = '196311151993031004';
-              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null, $panitera, null, 1, 0, 1, 'Diajukan', 'Menunggu Approval Panitera')");
+              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null, $panitera, null, 1, 0, 0, 'Diajukan', 'Menunggu Approval Panitera')");
 
             } elseif ($atasan == 'sekretaris') {
 
               $sekretaris = '197208161994031002';
-              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null,'$sekretaris', null, 1, 0, 1, 'Diajukan', 'Menunggu Approval Sekretaris')");
+              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null,'$sekretaris', null, 1, 0, 0, 'Diajukan', 'Menunggu Approval Sekretaris')");
 
             } elseif ($atasan == 'ketua') {
 
               $ketua = '196507021992031005';
-              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null,null, '$ketua', 1, 1, 0, 'Diajukan', 'Menunggu Approval Ketua')");
+              $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,null,null, '$ketua', 1, 1, 1, 'Disetujui', 'Pengajuan Cuti Disetujui')");
 
             } elseif ($atasan == 'panmudhukum') {
 
@@ -195,7 +199,7 @@
               $kasubag = '198304212011012013';
               $query = mysqli_query($koneksi, "INSERT INTO cuti_pegawai VALUES (null, '$id', '$jenis', '$alasan', '$lama', '$ketlama', '$dari', '$sampai' ,$kasubag, null, null, 0, 0, 1, 'Diajukan', 'Menunggu Approval Kasubag Umum dan Keuangan')");
 
-            }
+            } 
 
             if ($query) {
               echo "<script>alert('Data Berhasil Ditambahkan'); document.location='index.php?page=daftar_approval';</script>";

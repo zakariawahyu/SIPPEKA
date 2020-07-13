@@ -8,7 +8,8 @@ include "../database/koneksi.php";
     $ket = $_POST['reject'];
 
     if ($action == 'panitera_sekretaris') {
-      $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET app_panitera_sekretaris=1, status_cuti='Disetujui', ket_status_cuti='Pengajuan Cuti Diterima' WHERE id_cutipegawai='$id'");
+      $ketua = '196507021992031005';
+      $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET app_panitera_sekretaris=1, ketua='$ketua', status_cuti='Diajukan', ket_status_cuti='Menunggu Approval Ketua' WHERE id_cutipegawai='$id'");
     } elseif ($action == 'ketua') {
         $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET app_ketua=1 , status_cuti='Disetujui' , ket_status_cuti='Pengajuan Cuti Diterima'WHERE id_cutipegawai='$id'");
     } elseif ($action == '196311151993031004') {
@@ -21,6 +22,8 @@ include "../database/koneksi.php";
       $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET  status_cuti='Ditangguhkan', ket_status_cuti='$ket' WHERE id_cutipegawai='$id'");
     } else if ($action == 'Tidak Disetujui') {
       $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET  status_cuti='Tidak Disetujui', ket_status_cuti='$ket' WHERE id_cutipegawai='$id'");
+    } else if ($action == 'disetujuipaniterasekretaris') {
+      $query = mysqli_query($koneksi, "UPDATE cuti_pegawai SET app_panitera_sekretaris=1 , status_cuti='Disetujui' , ket_status_cuti='Pengajuan Cuti Diterima'WHERE id_cutipegawai='$id'");
     }
 
     if ($query) {

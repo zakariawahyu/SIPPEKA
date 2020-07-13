@@ -108,27 +108,27 @@
                   <select name="aksi" id="aksi" class="form-control" required>
                     <option value="" selected disabled>---- Pilih Aksi ----</option>
                     <?php
-                    if ($jabatan == 'JURU SITA' || $jabatan =='JURU SITA PENGGANTI' || $jabatan == 'PANITERA PENGGANTI' || $jabatan == 'PANMUD HUKUM' || $jabatan == 'PANMUD GUGATAN' || $jabatan == 'PANMUD HUKUM' || $jabatan == 'KASUBAG KEPEGAWAIAN DAN ORTALA' || $jabatan == 'KASUBAG PERNCANAAN, IT DAN PELAPORAN' || $jabatan == 'KASUBAG UMUM DAN KEUANGAN') {
-                      // Approval Panitera / Sekretaris
-                      $qrystatus = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=0 and app_ketua=1 and panitera_sekretaris='$nip'");
-                      $hasil = mysqli_fetch_array($qrystatus);
+                    
+                    // Query untuk mengambil data jika butuh aprroval ketua
+                    $qryketua = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=1 and app_ketua=0 and ketua='$nip'");
+                    $hasilketua = mysqli_fetch_array($qryketua);
 
-                      if (!empty($hasil['nama_pegawai'])) {
+                    // Query untuk mengambil data jika butuh aprroval panitera / sekretaris
+                    $qrypaniterasekretaris = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=0 and app_ketua=0 and panitera_sekretaris='$nip'");
+                    $hasilpaniterasekretaris = mysqli_fetch_array($qrypaniterasekretaris);
 
-                        ?>
-                        <option value="panitera_sekretaris">Disetujui</option>
-                        <option value="Perubahan">Perubahan</option>
-                        <option value="Ditangguhkan">Ditangguhkan</option>
-                        <option value="Tidak Disetujui">Tidak Disetujui</option>
-                        <?php
-                      }
+                    // Query untuk mengambil data jika butuh aprroval berhenti di panitera / sekretaris
+                    $qrystoppaniterasekretaris = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=0 and app_ketua=1 and panitera_sekretaris='$nip'");
+                    $hasilstoppaniterasekretaris = mysqli_fetch_array($qrystoppaniterasekretaris);
 
-                    } elseif ($jabatan == 'PANITERA' || $jabatan == 'SEKRETARIS' || $jabatan == 'HAKIM UTAMA MUDA' || $jabatan=='HAKIM MADYA UTAMA' || $jabatan =='WAKIL KETUA') {
-                      // Approval Ketua
-                      $qrystatus = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=1 and app_ketua=0 and ketua='$nip'");
-                      $hasil = mysqli_fetch_array($qrystatus);
+                    // Query untuk mengambil data jika butuh aprroval kasubag/panmud
+                    $qrypanmudkasubag = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg, jabatan jb WHERE pg.id_jabatan = jb.id_jabatan and ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=0 and app_panitera_sekretaris=0 and app_ketua=1 and panmud_kasubag='$nip'");
+                    $hasilpanmudkasubag = mysqli_fetch_array($qrypanmudkasubag);
+                    $jabatanstaff = $hasilpanmudkasubag['nama_jabatan'];
 
-                      if (!empty($hasil['nama_pegawai'])) {
+                    // Approval Ketua
+                    if (!empty($hasilketua['nama_pegawai'])) {
+                    
 
                         ?>
                         <option value="ketua">Disetujui</option>
@@ -136,16 +136,37 @@
                         <option value="Ditangguhkan">Ditangguhkan</option>
                         <option value="Tidak Disetujui">Tidak Disetujui</option>
                         <?php
-                      }
-                    } elseif ($jabatan == 'STAFF PELAKSANA PANMUD HUKUM' || $jabatan == 'STAFF PELAKSANA PANMUD GUGATAN' || $jabatan == 'STAFF PELAKSANA PANMUD PERMOHONAN') {
-                      // Approval staff Panmud
-                      $qrystatus = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=0 and app_panitera_sekretaris=0 and app_ketua=1 and panmud_kasubag='$nip'");
-                      $hasil = mysqli_fetch_array($qrystatus);
+                      
+                    }
 
-                      $qrystatus2 = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=0 and app_ketua=1 and panitera_sekretaris='$nip'");
-                      $hasil2 = mysqli_fetch_array($qrystatus2);
+                    // Approval Panitera / Sekretaris
+                    if (!empty($hasilpaniterasekretaris['nama_pegawai'])) {
+                      
 
-                      if (!empty($hasil['nama_pegawai'])) {
+                        ?>
+                        <option value="panitera_sekretaris">Disetujui</option>
+                        <option value="Perubahan">Perubahan</option>
+                        <option value="Ditangguhkan">Ditangguhkan</option>
+                        <option value="Tidak Disetujui">Tidak Disetujui</option>
+                        <?php
+                   
+                    } 
+
+                    // Approval Berhenti Panitera / Sekretaris
+                    if (!empty($hasilstoppaniterasekretaris['nama_pegawai'])) {
+                      
+
+                        ?>
+                        <option value="disetujuipaniterasekretaris">Disetujui</option>
+                        <option value="Perubahan">Perubahan</option>
+                        <option value="Ditangguhkan">Ditangguhkan</option>
+                        <option value="Tidak Disetujui">Tidak Disetujui</option>
+                        <?php
+                   
+                    } 
+                     
+                     // Approval Panmud
+                    if ($jabatanstaff == 'STAFF PELAKSANA PANMUD HUKUM' || $jabatanstaff == 'STAFF PELAKSANA PANMUD GUGATAN' || $jabatanstaff == 'STAFF PELAKSANA PANMUD PERMOHONAN') {
 
                         ?>
                         <option value="196311151993031004">Disetujui</option>
@@ -153,23 +174,10 @@
                         <option value="Ditangguhkan">Ditangguhkan</option>
                         <option value="Tidak Disetujui">Tidak Disetujui</option>
                         <?php
-                      } elseif (!empty($hasil2['nama_pegawai'])) {
-                        ?>
-                        <option value="panitera_sekretaris">Disetujui</option>
-                        <option value="Perubahan">Perubahan</option>
-                        <option value="Ditangguhkan">Ditangguhkan</option>
-                        <option value="Tidak Disetujui">Tidak Disetujui</option>
-                        <?php
+                      
                       }
-                    } elseif ($jabatan == 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA' || $jabatan == 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN' || $jabatan == 'STAFF PELAKSANA UMUM DAN KEUANGAN') {
-                      // Approval staff Kasubag
-                      $qrystatus = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=0 and app_panitera_sekretaris=0 and app_ketua=1 and panmud_kasubag='$nip'");
-                      $hasil = mysqli_fetch_array($qrystatus);
-
-                      $qrystatus2 = mysqli_query($koneksi, "SELECT * FROM cuti_pegawai ct, pegawai pg WHERE ct.id_pegawai=pg.id_pegawai and pg.nip='$nippegawai' and app_panmud_kasubag=1 and app_panitera_sekretaris=0 and app_ketua=1 and panitera_sekretaris='$nip'");
-                      $hasil2 = mysqli_fetch_array($qrystatus2);
-
-                      if (!empty($hasil['nama_pegawai'])) {
+                      //Aproval kasubag
+                      if ($jabatanstaff == 'STAFF PELAKSANA KEPEGAWAIAN DAN ORTALA' || $jabatanstaff == 'STAFF PELAKSANA PERNCANAAN, IT DAN PELAPORAN' || $jabatanstaff == 'STAFF PELAKSANA UMUM DAN KEUANGAN' ) {
 
                         ?>
                         <option value="197208161994031002">Disetujui</option>
@@ -177,15 +185,7 @@
                         <option value="Ditangguhkan">Ditangguhkan</option>
                         <option value="Tidak Disetujui">Tidak Disetujui</option>
                         <?php
-                      } elseif (!empty($hasil2['nama_pegawai'])) {
-                        ?>
-                        <option value="panitera_sekretaris">Disetujui</option>
-                        <option value="Perubahan">Perubahan</option>
-                        <option value="Ditangguhkan">Ditangguhkan</option>
-                        <option value="Tidak Disetujui">Tidak Disetujui</option>
-                        <?php
                       }
-                    }
 
                      ?>
 
