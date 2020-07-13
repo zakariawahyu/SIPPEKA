@@ -13,10 +13,12 @@ if (isset($_POST['login'])) {
   if ($row == "Admin") {
     session_start();
     $_SESSION['nip'] = $nip;
+    $_SESSION['role'] = 'Admin';
     echo "<script>alert('Login Berhasil'); document.location='admin/index.php';</script>";
   } elseif ($row == "User") {
     session_start();
     $_SESSION['nip'] = $nip;
+    $_SESSION['role'] = 'User';
     echo "<script>alert('Login Berhasil'); document.location='user/index.php';</script>";
   }  else {
     echo "<script>alert('Username & Password Salah !'); document.location='index.php';</script>";

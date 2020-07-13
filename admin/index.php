@@ -1,4 +1,14 @@
-<?php session_start(); ?>
+<?php session_start(); 
+
+  if ($_SESSION['nip']) {
+  $nip = $_SESSION['nip'];
+
+
+  // cek apakah yang mengakses halaman ini sudah login
+	if($_SESSION['role']== "User"){
+		header("location:../index.php");
+  }
+  ?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -68,8 +78,7 @@
             <!-- sidebar menu -->
             <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
                 <?php 
-                if ($_SESSION['nip']) {
-                $nip = $_SESSION['nip'];
+
                 
                 include'menu.php'; ?>
             </div>
