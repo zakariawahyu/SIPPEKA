@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 09, 2020 at 07:20 PM
+-- Generation Time: Jul 13, 2020 at 04:22 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -97,7 +97,7 @@ INSERT INTO `jabatan` (`id_jabatan`, `nama_jabatan`) VALUES
 (5, 'PANITERA'),
 (6, 'SEKRETARIS'),
 (7, 'PANMUD HUKUM'),
-(8, 'PANMUD  GUGATAN'),
+(8, 'PANMUD GUGATAN'),
 (9, 'PANMUD PERMOHONAN'),
 (10, 'STAFF PELAKSANA PANMUD HUKUM'),
 (11, 'STAFF PELAKSANA PANMUD GUGATAN'),

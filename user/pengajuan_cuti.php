@@ -81,7 +81,7 @@
                                 $rowjabatan = mysqli_fetch_array($queryjabatan);
                                 $jabatan = $rowjabatan['nama_jabatan'];
 
-                                if ($jabatan == 'JURU SITA' || $jabatan =='JURU SITA PENGGANTI' || $jabatan == 'PANITERA PENGGANTI' || $jabatan == 'PANMUD HUKUM' || $jabatan == 'PANMUD GUGATAN' || $jabatan == 'PANMUD HUKUM' ) {
+                                if ($jabatan == 'JURU SITA' || $jabatan =='JURU SITA PENGGANTI' || $jabatan == 'PANITERA PENGGANTI' || $jabatan == 'PANMUD HUKUM' ||  $jabatan == 'PANMUD PERMOHONAN' || $jabatan == 'PANMUD GUGATAN') {
                                   ?>
                                   <option value="panitera">PANITERA</option>
                                   <?php
